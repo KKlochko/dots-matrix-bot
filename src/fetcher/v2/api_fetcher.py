@@ -30,8 +30,8 @@ class ApiFetcher:
         """
         url = f"{self.__base_url}{endpoint}"
 
-        async with self.__session.get(url) as session:
-            await session.post(url, json=context)
-            json_data = await session.json()
-            return (session.status, json_data)
+        async with self.__session as session:
+            async with session.post(url, json=context) as response:
+                json_data = await response.json()
+                return (response.status, json_data)
 
