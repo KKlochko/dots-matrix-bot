@@ -4,8 +4,9 @@ name: default
 
 steps:
 - name: install dependencies and run tests
-  image: python:3.10-alpine
+  image: python:3.10-slim
   commands:
+  - pip install python-olm --extra-index-url https://gitlab.matrix.org/api/v4/projects/27/packages/pypi/simple
   - pip install -r dev_requirements.txt
   - pytest -s
 
