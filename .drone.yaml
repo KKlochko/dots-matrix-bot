@@ -1,0 +1,11 @@
+kind: pipeline
+type: docker
+name: default
+
+steps:
+- name: install dependencies and run tests
+  image: python:3.10-alpine
+  commands:
+  - pip install -r requirements.txt
+  - pytest -s
+
