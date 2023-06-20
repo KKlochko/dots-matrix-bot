@@ -10,12 +10,18 @@ def setup(bot: botlib.Bot, prefix: str):
     async def help_command(room: nio.rooms.MatrixRoom, message: nio.events.room_events.Event):
         match = botlib.MessageMatch(room, message, bot, prefix=prefix)
 
-        if match.is_not_from_this_bot() and match.prefix() and match.command('help'):
+        if not match.is_not_from_this_bot():
+            return
+
+        if not match.prefix():
+            return
+
+        if match.command('help'):
             await help_handler(bot=bot, room_id=room.room_id, sender=message.sender, admin_id=bot.config.admin_id)
 
-        if match.is_not_from_this_bot() and match.prefix() and match.command('cities-list'):
+        if match.command('cities-list'):
             await list_cities_handler(bot=bot, room_id=room.room_id, sender=message.sender, admin_id=bot.config.admin_id)
 
-        if match.is_not_from_this_bot() and match.prefix() and match.command('register'):
+        if match.command('register'):
             await register_handler(bot=bot, room_id=room.room_id, sender=message.sender, admin_id=bot.config.admin_id, args=match.args())
 
