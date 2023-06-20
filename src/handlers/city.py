@@ -21,3 +21,14 @@ async def list_cities_handler(room_id: str, bot: botlib.Bot, sender: str, admin_
 
     await bot.api.send_markdown_message(room_id=room_id, message=msg)
 
+async def select_city_handler(room_id: str, bot: botlib.Bot, sender: str, admin_id: str, city_name: str):
+
+    session = aiohttp.ClientSession(json_serialize=ujson.dumps)
+    apiFetcher = ApiFetcher(dots_bot_api_config.get_base_url(), session)
+    formatter = CityFormatter()
+    cityAPI = CityAPI(apiFetcher, formatter)
+
+    msg: str = await cityAPI.select_object_message(city_name, sender)
+
+    await bot.api.send_markdown_message(room_id=room_id, message=msg)
+
