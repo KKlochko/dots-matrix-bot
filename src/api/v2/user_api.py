@@ -17,7 +17,7 @@ class UserAPI:
 
         status, json_data = await self.__fetcher.send_json(endpoint, {
             'username': username,
-            'matrix_username': matrix_username,
+            'matrixUsername': matrix_username,
             'phone': phone,
         })
 

@@ -10,7 +10,7 @@ from src.fmt.city_formatter import CityFormatter
 
 dots_bot_api_config = DotsBotApiConfig()
 
-async def list_cities_handler(room_id: str, bot: botlib.Bot, sender: str, admin_id: str):
+async def city_list_handler(room_id: str, bot: botlib.Bot, sender: str, admin_id: str):
 
     session = aiohttp.ClientSession(json_serialize=ujson.dumps)
     apiFetcher = ApiFetcher(dots_bot_api_config.get_base_url(), session)

@@ -2,7 +2,7 @@ import nio
 import simplematrixbotlib as botlib
 
 from src.handlers.help import help_handler
-from src.handlers.city import list_cities_handler, select_city_handler
+from src.handlers.city import city_list_handler, select_city_handler
 from src.handlers.user import register_handler
 
 from src.fmt.city_formatter import CityFormatter
@@ -18,11 +18,13 @@ def setup(bot: botlib.Bot, prefix: str):
         if not match.prefix():
             return
 
+        # No registered user required
+
         if match.command('help'):
             await help_handler(bot=bot, room_id=room.room_id, sender=message.sender, admin_id=bot.config.admin_id)
 
-        if match.command('cities-list'):
-            await list_cities_handler(bot=bot, room_id=room.room_id, sender=message.sender, admin_id=bot.config.admin_id)
+        if match.command('city-list'):
+            await city_list_handler(bot=bot, room_id=room.room_id, sender=message.sender, admin_id=bot.config.admin_id)
 
         if match.command('select-city'):
             formatter = CityFormatter()
