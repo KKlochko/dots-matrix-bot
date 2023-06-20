@@ -5,8 +5,8 @@ class CityFormatter(AbstractFormatter):
         name = city['name']
         return f"- {name}\n"
 
-    def format_all(self, cities: dict) -> str:
-        formated_message = "Cities:\n\n"
+    def format_all(self, cities: dict, header: str = "# Міста\n\n") -> str:
+        formated_message = header
 
         for city in cities['data']:
             formated_item = self.format(city)
