@@ -3,9 +3,11 @@ import simplematrixbotlib as botlib
 
 from src.handlers.help import help_handler
 from src.handlers.city import city_list_handler, select_city_handler
+from src.handlers.company import company_list_handler, select_company_handler
 from src.handlers.user import register_handler
 
 from src.fmt.city_formatter import CityFormatter
+from src.fmt.company_formatter import CompanyFormatter
 
 def setup(bot: botlib.Bot, prefix: str):
     @bot.listener.on_message_event
@@ -33,4 +35,14 @@ def setup(bot: botlib.Bot, prefix: str):
 
         if match.command('register'):
             await register_handler(bot=bot, room_id=room.room_id, sender=message.sender, admin_id=bot.config.admin_id, args=match.args())
+
+        # A registered user required
+
+        if match.command('company-list'):
+            await company_list_handler(bot=bot, room_id=room.room_id, sender=message.sender, admin_id=bot.config.admin_id)
+
+        if match.command('select-company'):
+            formatter = CompanyFormatter()
+            company_name = formatter.get_name_from_parts(match.args())
+            await select_company_handler(bot=bot, room_id=room.room_id, sender=message.sender, admin_id=bot.config.admin_id, company_name=company_name)
 
