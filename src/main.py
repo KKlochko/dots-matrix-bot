@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from environs import Env
 import simplematrixbotlib as botlib
-from handlers import setup
+from src.handlers import setup
 
 env = Env()
 env.read_env()
@@ -9,7 +9,6 @@ env.read_env()
 USERNAME = env('USERNAME')
 PASSWORD = env('PASSWORD')
 SERVER = env('SERVER')
-
 
 @dataclass
 class MyConfig(botlib.Config):
