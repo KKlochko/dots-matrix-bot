@@ -17,3 +17,18 @@ class ItemFormatter(AbstractFormatter):
 
         return formated_message
 
+    def get_name_and_count_from_parts(self, parts: list):
+        line = " ".join(parts)
+
+        if not ', ' in line:
+            return {
+                'error': 'Не правильний формат'
+            }
+
+        name, count = line.split(', ')
+
+        return {
+            'name': name,
+            'count': int(count)
+        }
+
