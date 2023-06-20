@@ -28,3 +28,25 @@ def test_format_cities():
 
     assert expected_format == cities_fmt
 
+def test_get_name_from_one_parts():
+    city_parts = ['Чернігів']
+
+    expected_name = 'Чернігів'
+
+    formatter = CityFormatter()
+
+    city_name = formatter.get_name_from_parts(city_parts)
+
+    assert expected_name == city_name
+
+def test_get_name_from_two_parts():
+    city_parts = ['Біла', 'Церква']
+
+    expected_name = 'Біла Церква'
+
+    formatter = CityFormatter()
+
+    city_name = formatter.get_name_from_parts(city_parts)
+
+    assert expected_name == city_name
+

@@ -28,3 +28,25 @@ def test_format_companies():
 
     assert expected_format == companies_fmt
 
+def test_get_name_from_one_parts():
+    company_parts = ['Компанія']
+
+    expected_name = 'Компанія'
+
+    formatter = CompanyFormatter()
+
+    company_name = formatter.get_name_from_parts(company_parts)
+
+    assert expected_name == company_name
+
+def test_get_name_from_two_parts():
+    company_parts = ['Велика', 'компанія']
+
+    expected_name = 'Велика компанія'
+
+    formatter = CompanyFormatter()
+
+    company_name = formatter.get_name_from_parts(company_parts)
+
+    assert expected_name == company_name
+

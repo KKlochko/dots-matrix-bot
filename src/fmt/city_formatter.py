@@ -14,3 +14,6 @@ class CityFormatter(AbstractFormatter):
 
         return formated_message
 
+    def get_name_from_parts(self, parts: list):
+        return " ".join(parts)
+
