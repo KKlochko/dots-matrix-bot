@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dots-matrix-bot"
+version = "0.1.0"
+authors = [
+  { name="Kostiantyn Klochko", email="kklochko@protonmail.com" },
+]
+description = "dots-matrix-bot is the interface for dots-bot-api."
+readme = "README.rst"
+license = { file="COPYING" }
+requires-python = ">=3.10"
+packages = [{include = "src"}]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "simplematrixbotlib~=2.8.0",
+    "environs~=9.5.0",
+    "aiohttp~=3.8.3",
+    "python-olm",
+    "matrix-nio[e2e]"
+]
+
+[tool.coverage.run]
+source = ["src"]
+
+[project.urls]
+"Homepage" = "https://gitlab.com/KKlochko/dots-matrix-bot"
+"Bug Tracker" = "https://gitlab.com/KKlochko/dots-matrix-bot/issues"
+

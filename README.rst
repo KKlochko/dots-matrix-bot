@@ -17,3 +17,7 @@ Author
 
 Kostiantyn Klochko (c) 2023
 
+License
+=======
+
+Under the GNU Affero General Public License v3.0 or later.
