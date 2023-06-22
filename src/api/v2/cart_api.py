@@ -56,3 +56,23 @@ class CartAPI:
             case {"error": error_message}:
                 return error_message
 
+    async def get_order(self, username: str):
+        endpoint = f"/api/v2/order?matrixUsername={username}"
+
+        status, json_data = await self.__fetcher.fetch_json(endpoint)
+
+        if status == 200:
+            return {"ok": json_data}
+
+        return {"error": "Сталася помилка, спробуйте пізніше."}
+
+    async def get_order_message(self, username: str) -> str:
+        response = await self.get_order(username)
+
+        match response:
+            case {"ok": json_data}:
+                return self.__formatter.format(json_data)
+
+            case {"error": error_message}:
+                return error_message
+
