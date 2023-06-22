@@ -6,6 +6,7 @@ from src.handlers.city import city_list_handler, select_city_handler
 from src.handlers.company import company_list_handler, select_company_handler
 from src.handlers.category import category_list_handler
 from src.handlers.cart import cart_list_handler, add_item_handler
+from src.handlers.cart import order_handler
 from src.handlers.user import register_handler
 
 from src.fmt.city_formatter import CityFormatter
@@ -61,4 +62,7 @@ def setup(bot: botlib.Bot, prefix: str):
             name, count = line.split(',')
             count = int(count)
             await add_item_handler(bot=bot, room_id=room.room_id, sender=message.sender, admin_id=bot.config.admin_id, item_name=name, count=count)
+
+        if match.command('order'):
+            await order_handler(bot=bot, room_id=room.room_id, sender=message.sender, admin_id=bot.config.admin_id)
 

@@ -8,6 +8,7 @@ from src.api.v2.cart_api import CartAPI
 from src.fetcher.v2.api_fetcher import ApiFetcher
 from src.fmt.item_formatter import ItemFormatter
 from src.fmt.cart_item_formatter import CartItemFormatter
+from src.fmt.order_formatter import OrderFormatter
 
 dots_bot_api_config = DotsBotApiConfig()
 
@@ -19,6 +20,17 @@ async def cart_list_handler(room_id: str, bot: botlib.Bot, sender: str, admin_id
     cartAPI = CartAPI(apiFetcher, formatter)
 
     msg: str = await cartAPI.get_objects_message(sender)
+
+    await bot.api.send_markdown_message(room_id=room_id, message=msg)
+
+async def order_handler(room_id: str, bot: botlib.Bot, sender: str, admin_id: str):
+
+    session = aiohttp.ClientSession(json_serialize=ujson.dumps)
+    apiFetcher = ApiFetcher(dots_bot_api_config.get_base_url(), session)
+    formatter = OrderFormatter()
+    cartAPI = CartAPI(apiFetcher, formatter)
+
+    msg: str = await cartAPI.get_order_message(sender)
 
     await bot.api.send_markdown_message(room_id=room_id, message=msg)
 
