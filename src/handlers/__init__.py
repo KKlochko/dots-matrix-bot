@@ -23,10 +23,18 @@ def setup(bot: botlib.Bot, prefix: str):
         if not match.prefix():
             return
 
-        # No registered user required
-
         if match.command('help'):
             await help_handler(bot=bot, room_id=room.room_id, sender=message.sender, admin_id=bot.config.admin_id)
+
+    @bot.listener.on_message_event
+    async def guests_commands(room: nio.rooms.MatrixRoom, message: nio.events.room_events.Event):
+        match = botlib.MessageMatch(room, message, bot, prefix=prefix)
+
+        if not match.is_not_from_this_bot():
+            return
+
+        if not match.prefix():
+            return
 
         if match.command('city-list'):
             await city_list_handler(bot=bot, room_id=room.room_id, sender=message.sender, admin_id=bot.config.admin_id)
@@ -39,7 +47,15 @@ def setup(bot: botlib.Bot, prefix: str):
         if match.command('register'):
             await register_handler(bot=bot, room_id=room.room_id, sender=message.sender, admin_id=bot.config.admin_id, args=match.args())
 
-        # A registered user required
+    @bot.listener.on_message_event
+    async def authorized_commands(room: nio.rooms.MatrixRoom, message: nio.events.room_events.Event):
+        match = botlib.MessageMatch(room, message, bot, prefix=prefix)
+
+        if not match.is_not_from_this_bot():
+            return
+
+        if not match.prefix():
+            return
 
         if match.command('company-list'):
             await company_list_handler(bot=bot, room_id=room.room_id, sender=message.sender, admin_id=bot.config.admin_id)
