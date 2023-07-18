@@ -21,6 +21,7 @@ Setup
       USERNAME=@example:example.com
       PASSWORD=password
       SERVER=https://example.com
+      BOT_API_BASE_URL=https://domain
 
 -  change the ``config.toml``: `more about allowlist and blocklist
    formats <https://simple-matrix-bot-lib.readthedocs.io/en/latest/examples.html#id2>`__
